@@ -13,18 +13,55 @@ and open the template in the editor.
             * {
                 text-align: center;
             }
+            text {
+               font-size: 28px;
+               Color: red;
+            }
+            text2 {
+              font-size: 23px;
+            }
             div {
-                font-size: 2em;
+                font-size: 4em;
+            }
+            input#submit_button {
+              width: 100px;
+              height: 50px;
             }
             button {
                 font-size: large;
                 width: 40%;
                 height: 4em;
+
+            }
+            body{
+              background-color: rgb(0, 250, 213);
             }
         </style>
     </head>
     <body>
-        <div>Application 3</div>
-        <button type="button" onclick="location.replace('index.html');">Return</button>
+        <div>ユーザ登録</div>
+        <!-- フォームを使い情報を入力させる -->
+        <br>
+        <text>
+        ↓新規登録はこちらから!!↓<br>
+        </text>
+        <br>
+        <form method="POST" action="app3-2.php">
+            <li><text2><label>ユーザーID</text2>
+              <input type="text" size="10" name="id"></label> (10文字まで)</li>
+            <li><text2><label>掲示板名前</text2>
+              <input type="text" size="10" name="name"></label>(10文字まで)</li>
+            <li><text2><label>パスワード</text2>
+                <input type="text" size="15" name="pas1"></label>(15文字まで)</li>
+            <li><text2><label>確認用再入力</text2>
+                <input type="text" size="15" name="pas1"></label>(15文字まで)</li>
+            <br>
+            <input  id="submit_button" type="submit"  value="送信" class="button">
+
+        </form>
+        <!-- 元の画面に戻る -->
+        <br>
+        <br>
+        <button type="button" onclick="location.replace('index.html');">戻る</button>
     </body>
 </html>
