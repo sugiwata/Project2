@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Application 3</title>
+        <title>ユーザ登録</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style type="text/css">
@@ -23,9 +23,24 @@ and open the template in the editor.
             div {
                 font-size: 4em;
             }
-            input#submit_button {
-              width: 100px;
-              height: 50px;
+            .sub {
+              display       : inline-block;
+              border-radius : 5%;          /* 角丸       */
+              font-size     : 15pt;        /* 文字サイズ */
+              text-align    : center;      /* 文字位置   */
+              cursor        : pointer;     /* カーソル   */
+              padding       : 6px 6px;   /* 余白       */
+              background    : #ffffff;     /* 背景色     */
+              color         : #000000;     /* 文字色     */
+              line-height   : 1em;         /* 1行の高さ  */
+              transition    : .3s;         /* なめらか変化 */
+              box-shadow    : 1px 1px 3px #666666;  /* 影の設定 */
+              border        : 2px solid #ffffff;    /* 枠の指定 */
+            }
+            .sub:hover {
+              box-shadow    : none;        /* カーソル時の影消去 */
+              color         : #ffffff;     /* 背景色     */
+              background    : #000000;     /* 文字色     */
             }
             button {
                 font-size: large;
@@ -47,16 +62,17 @@ and open the template in the editor.
         </text>
         <br>
         <form method="POST" action="app3-2.php">
-            <li><text2><label>ユーザーID</text2>
-              <input type="text" size="10" name="id"></label> (10文字まで)</li>
-            <li><text2><label>掲示板名前</text2>
-              <input type="text" size="10" name="name"></label>(10文字まで)</li>
-            <li><text2><label>パスワード</text2>
-                <input type="text" size="15" name="pas1"></label>(15文字まで)</li>
-            <li><text2><label>確認用再入力</text2>
-                <input type="text" size="15" name="pas1"></label>(15文字まで)</li>
-            <br>
-            <input  id="submit_button" type="submit"  value="送信" class="button">
+          <text2>ユーザID：</text2>
+          <input name="fUserID" type="text" id="fUserID" ><br>
+          <text2>ユーザ名：</text2>
+          <input name="fUserName" type="text" id="fUserName"><br>
+          <text2>パスワード：</text2>
+          <input name="fPassWd1" type="password" id="fPassWd1"><br>
+          <text2>確認用パスワード：</text2>
+          <input name="fPassWd2" type="password" id="fPassWd2"><br>
+          <br>
+          <input type="reset"  value="クリア" class="sub">
+          <input type="submit" value="送信する" class="sub">
 
         </form>
         <!-- 元の画面に戻る -->
