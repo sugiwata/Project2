@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>App Sample</title>
+        <title>メインメニュー</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style type="text/css">
@@ -14,27 +14,31 @@ and open the template in the editor.
                 text-align: center;
             }
             div {
-                font-size: 3em;
+                font-size: 8em;
             }
             table {
                 width: 100%;
             }
             tr{
-                height: 6em;
+                height: 10em;
             }
             button {
                 font-size: large;
-                width: 80%;
-                height: 4em;
+                width: 50%;
+                height: 6em;
+            }
+
+            body{
+              background-color: rgb(0, 250, 213);
             }
         </style>
     </head>
     <body>
-        <div>App Sample</div>
+        <div>ザ・掲示板</div>
         <table>
-            <tr><td><button type="button" onclick="location.replace('app1.html');">Application 1</button></td></tr>
-            <tr><td><button type="button" onclick="location.replace('app2.html');">Application 2</button></td></tr>
-            <tr><td><button type="button" onclick="location.replace('app3.html');">Application 3</button></td></tr>
+            <tr><td><button type="button" onclick="location.replace('app1.html');">カテゴリ一覧</button></td></tr>
+            <tr><td><button type="button" onclick="location.replace('app2.php');">投稿する</button></td></tr>
+            <tr><td><button type="button" onclick="location.replace('app3.php');">ユーザ設定</button></td></tr>
         </table>
 
     </body>
