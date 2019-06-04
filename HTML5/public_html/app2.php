@@ -128,7 +128,7 @@ eot4;
 	<br><button type="button" onclick="location.replace('index.html');" class="sub2">トップページに戻る</button>
 	<br><button type="button" onclick="location.replace('app1.html');" class="sub2">カテゴリ一覧へ</button>
 	<form method="POST" action="app4.php">
-	<input type="hidden" name="" value="$ca_d">
+	<input type="hidden" name="cate" value="$ca_d">
 	<input type="submit" value="閲覧画面へ" class="sub2">
 	</form>
 	</body>
