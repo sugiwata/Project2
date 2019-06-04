@@ -68,15 +68,15 @@ and open the template in the editor.
                </FONT><br>";
 
       }else{
-        $db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
-        $re = $s->query("SELECT count(*) FROM user_master where userName= '{$sUserName}'");
-        $count = $re->rowCount();
+        $s->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+        $re = $s->query("SELECT count(*) FROM user_master WHERE username ='$sUserName'");
+        $count = $re->fetchColumn();
         //データ件数が０件の場合
-        if($count >  0){
+        if($count !=  0){
            echo "すでに{$sUserName}の名前は登録済みです。もう一度別の名前で登録してください。
                 </FONT><br>";
         }else{
-           $s->query("INSERT INTO user_master VALUES ('{$sUserID}','{$sPassWd1}','{$sUserName}')");
+           $s->query("INSERT INTO user_master VALUES ('$sUserID','$sPassWd1','$sUserName')");
            echo "{$sUserName}のID登録が完了しました。";
         }
       }
