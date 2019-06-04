@@ -6,48 +6,125 @@ and open the template in the editor.
 -->
 <html>
     <head>
+
         <title>カテゴリ一覧</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <style type="text/css">
             * {
                 text-align: center;
             }
             div {
-                font-size: 8em;
+                font-size: 7em;
+                font-family: impact;
+
+                color: #364e96;/*文字色*/
+                background: #dfefff;
+                box-shadow: 0px 0px 0px 5px #dfefff;
+                border: dashed 2px white;
+                padding: 0.2em 0.5em;
             }
-            button {
+
+            table {
+                width: 100%;
+            }
+            tr{
+                height: 8em;
+            }
+
+            .bbb {
+              display: inline-block;
+              padding: 7px 20px;
+              border-radius: 25px;
+              text-decoration: none;
+              color: #FFF;
+              background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+              transition: .4s;
+
                 font-size: large;
                 width: 60%;
                 height: 6em;
+                background-color: salmon;
+                font-family: impact;
             }
 
+            {
+              background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
+            }
 
             body{
-              background-color: rgb(0, 250, 213);
+              background-color: #0097A7;
+              background-size: 10px 10px;
+              background-image:
+               linear-gradient(45deg,  #00838F 25%, #00838F 25%, transparent 25%,
+                transparent 75%, #00838F 75%, #00838F 75%),
+               linear-gradient(-45deg, #00838F 25%, #00838F 25%, transparent 25%,
+                transparent 75%, #00838F 75%, #00838F 75%);
+              /*background-color: rgb(0, 250, 213);*/
+
             }
+
+  button2 {     /*戻るボタン*/
+
+    position: relative;
+    bottom: 500px;
+    right: 600px;
+
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    margin: 0 auto;
+    font-size: 20px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    color: #FFFFFF;
+    background: #616161;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    font-family: impact;
+}
+.aaa{
+  position: relative;
+  top: 50px;
+  left: 50px;
+}
+
+
+
 
         </style>
         <script type="text/javascript">
-
         </script>
+
     </head>
-    <body onload="sample()">
+  <body onload="sample()">
+
         <div>カテゴリ一覧</div>
-        <button type="button" name="category" value="1"  onclick="app4.php">ゲーム</buyton>
-        <button type="button" name="category" value="2"  onclick="app4.php">スポーツ</button>
-        <button type="button" name="category" value="3"  onclick="app4.php">ミュージック</button>
-        <button type="button" name="category" value="4"  onclick="app4.php">ニュース</button>
-        <button type="button"   onclick="location.replace('index.html');">戻る</button>
-        <p>
-        <p>
-        <p>
+        <table>
+          <form method = "POST" action = "app4.php">
+            <input type =  "hidden" name = "cate" value = "1">
+        <tr><td><input type="submit" name="category" value="ゲーム"  onclick="app4.php" class = "bbb"></tr></td>
+      </form>
 
-        <p>
-        <p>
+      <form method = "POST" action = "app4.php">
+        <input type =  "hidden" name = "cate" value = "2">
+    <tr><td><input type="submit" name="category" value="スポーツ"  onclick="app4.php" class = "bbb"></tr></td>
+  </form>
 
-        </p>
+  <form method = "POST" action = "app4.php">
+    <input type =  "hidden" name = "cate" value = "3">
+<tr><td><input type="submit" name="category" value="ミュージック"  onclick="app4.php" class = "bbb"></tr></td>
+</form>
 
+<form method = "POST" action = "app4.php">
+  <input type =  "hidden" name = "cate" value = "4">
+<tr><td><input type="submit" name="category" value="ニュース"  onclick="app4.php" class = "bbb" ></tr></td>
+</form>
 
+        <tr><td><button2 type="button"   onclick="location.replace('index.html');">戻る</button></tr></td>
+      </table>
     </body>
 </html>
