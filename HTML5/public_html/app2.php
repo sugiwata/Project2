@@ -3,13 +3,17 @@
 session_start();
 
 $s=new PDO("mysql:host=localhost;dbname=pro2test","root","root");
-$ca_d=isset($_GET["category"])?$_GET["category"]:null;
-$te_d=isset($_GET["text"])?htmlspecialchars($_GET["text"]):null;
-$usid="k18030";//isset($_SESSION["usid"])?htmlspecialchars($_SESSION["usid"]):null;
+$ca_d=isset($_POST["category"])?$_POST["category"]:null;
+$te_d=isset($_POST["text"])?htmlspecialchars($_POST["text"]):null;
+$usid=isset($_SESSION["usid"])?htmlspecialchars($_SESSION["usid"]):null;
+
+$session_token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
+$token = isset($_POST['token']) ? $_POST['token'] : '';
 
 print<<<eot1
 <!DOCTYPE html>
 <html lang="ja">
+<title>投稿画面</title>
 <style>
 * {
    text-align: center;
@@ -65,20 +69,37 @@ text {
 <body>
 eot1;
 
+if ($ca_d!=null&&$te_d!=null) {
+	if($token == '' || $token != $session_token ){
+		print<<<eot6
+		<text>不正な処理を確認しました</text>
+		<br><a href="app2.php">ここからやり直してください</a>
+		</body>
+		</html>
+eot6;
+		exit;
+	}
+}
+
 if($usid==null){
 	print <<<eot5
 	<div>
 	ログインしていません
-	<br><button type="button" onclick="location.replace('app3.html');">ここからログインしてください</button>
+	<br><button type="button" onclick="location.replace('app3.html');" class="button">ここからログインしてください</button>
 	</div>
 	</body>
 	</HTML>
 eot5;
-}else{
-	if($ca_d==null&&$te_d==null){
+	exit;
+}
+
+$token = md5(uniqid(rand(), true));
+$_SESSION['token'] = $token;
+
+if($ca_d==null&&$te_d==null){
 	print <<<eot4
 	<div id="title">投稿画面</div> 
-		<form method="GET" action="app2.php">
+		<form method="POST" action="app2.php">
 				<label>カテゴリー
 					<select name="category">
 						<option value="">選択してください</option>
@@ -93,13 +114,14 @@ eot5;
 					<textarea id="text" name="text"></textarea>
 				</label>
 				<br>
+				<input type="hidden" name="token" value="$token">
 				<input type="submit" value="送信" class="sub">
 			</form>
 			<br><button type="button" onclick="location.replace('index.html');" class="button">トップページに戻る</button>
 	</body>
 	</HTML>
 eot4;
-	}else if($ca_d!=""&&$te_d!=""){
+}else if($ca_d!=""&&$te_d!=""){
 	$s->query("INSERT INTO toko_master VALUES (0,'$ca_d','$usid',now(),'$te_d',0)");
 	print <<<eot2
 	投稿しました
@@ -112,11 +134,11 @@ eot4;
 	</body>
 	</html>
 eot2;
-	}else{
+}else{
 	print <<<eot3
 	<div id="title">投稿画面</div> 
 	<text>入力されていない項目があります</text>
-		<form method="GET" action="app2.php">
+		<form method="POST" action="app2.php">
 			<label>カテゴリー
 				<select name="category">
 					<option value="">選択してください</option>
@@ -131,12 +153,12 @@ eot2;
 				<textarea id="text" name="text">$te_d</textarea>
 			</label>
 			<br>
+			<input type="hidden" name="token" value="$token">
 			<input type="submit" value="送信" class="sub">
 		</form>
 		<br><button type="button" onclick="location.replace('index.html');" class="button">トップページに戻る</button>
 	</body>
 	</html>
 eot3;
-	}
 }
 ?>
