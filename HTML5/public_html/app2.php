@@ -19,21 +19,92 @@ print<<<eot1
    text-align: center;
 }
 body{
-   font-size: 23px;
-   background-color: rgb(0, 255, 213);
+   background-color: #0097A7;
+   background-size: 10px 10px;
+   background-image:
+      linear-gradient(45deg,  #00838F 25%, #00838F 25%, transparent 25%,
+      transparent 75%, #00838F 75%, #00838F 75%),
+      linear-gradient(-45deg, #00838F 25%, #00838F 25%, transparent 25%,
+      transparent 75%, #00838F 75%, #00838F 75%);
+      /*background-color: rgb(0, 250, 213);*/
 }
-#title{
-   font-size:4em;
+.title{
+   font-size: 7em;
+	font-family: impact;
+
+	color: #364e96;/*文字色*/
+	background: #dfefff;
+	box-shadow: 0px 0px 0px 5px #dfefff;
+	border: dashed 2px white;
+	padding: 0.2em 0.5em;
 }
-#text{
-   width:250px;
-   height:150px;
-   text-align: left;
-   size: 30px;
+.form{
+	padding: 7px 20px;
+	color: #00FFEA;
+	font-size: 30px;
 }
-text {
+.cp_ipselect {
+	overflow: hidden;
+	width: 25%;
+	margin: auto;
+	text-align: center;
+}
+.cp_ipselect select {
+	width: 100%;
+	padding-right: 1em;
+	cursor: pointer;
+	text-indent: 0.01px;
+	text-overflow: ellipsis;
+	border: none;
+	outline: none;
+	background: transparent;
+	background-image: none;
+	box-shadow: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+.cp_ipselect select::-ms-expand {
+    display: none;
+}
+.cp_ipselect.cp_sl04 {
+	position: relative;
+	border-radius: 2px;
+	border: 2px ;
+  border-radius: 50px;
+	background: #ffffff;
+}
+.cp_ipselect.cp_sl04::before {
+	position: absolute;
+	top: 0.8em;
+	right: 0.8em;
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #000000;
+	pointer-events: none;
+}
+.cp_ipselect.cp_sl04 select {
+	padding: 8px 38px 8px 8px;
+	font-size: 20px;
+}
+textarea{
+   width:300px;
+   height:180px;
+	text-align: left;
+	font-size: 20px;
+}
+text{
 	font-size: 28px;
-	Color: red;
+	padding: 7px 20px;
+	color: #FFF;
+}
+text2 {
+	font-size: 28px;
+	padding: 7px 20px;
+	color: yellow;
 }
 .sub {
 	display       : inline-block;
@@ -48,32 +119,32 @@ text {
 	transition    : .3s;         /* なめらか変化 */
 	box-shadow    : 1px 1px 3px #666666;  /* 影の設定 */
 	border        : 2px solid #ffffff;    /* 枠の指定 */
- }
- .sub2{
-	display       : inline-block;
-	font-size     : 15pt;        /* 文字サイズ */
-	text-align    : center;      /* 文字位置   */
-	cursor        : pointer;     /* カーソル   */
-	padding       : 6px 6px;   /* 余白       */
-	background    : #ffffff;     /* 背景色     */
-	color         : #000000;     /* 文字色     */
-	line-height   : 1em;         /* 1行の高さ  */
- }
- .button {
-	font-size: large;
-	width: 40%;
-	height: 4em;
+}
+.bbb {
+	display: inline-block;
+	padding: 7px 20px;
+	border-radius: 25px;
+	text-decoration: none;
+	color: #FFF;
+	background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+	transition: .4s;
 
+	  font-size: large;
+	  width: 30%;
+	  height: 3em;
+	  background-color: salmon;
+	  font-family: impact;
 }
 </style>
 <body>
+<div class="title">投稿画面</div> 
 eot1;
 
 if ($ca_d!=null&&$te_d!=null) {
 	if($token == '' || $token != $session_token ){
 		print<<<eot6
-		<text>不正な処理を確認しました</text>
-		<br><a href="app2.php">ここからやり直してください</a>
+		<text2>不正な処理を確認しました</text2>
+		<br><button type="button" onclick="location.href='app2.php'" class="bbb">ここからやり直してください</button>
 		</body>
 		</html>
 eot6;
@@ -83,10 +154,8 @@ eot6;
 
 if($usid==null){
 	print <<<eot5
-	<div>
-	ログインしていません
-	<br><button type="button" onclick="location.replace('app3.html');" class="button">ここからログインしてください</button>
-	</div>
+	<text>ログインしていません</text>
+	<button type="button" onclick="location.href='app3.html'" class="bbb">ここからログインしてください</button>
 	</body>
 	</HTML>
 eot5;
@@ -98,48 +167,47 @@ $_SESSION['token'] = $token;
 
 if($ca_d==null&&$te_d==null){
 	print <<<eot4
-	<div id="title">投稿画面</div> 
-		<form method="POST" action="app2.php">
+		<form method="POST" action="app2.php" class="form">
 				<label>カテゴリー
-					<select name="category">
-						<option value="">選択してください</option>
+					<div class="cp_ipselect cp_sl04">
+					<select name="category" required>
+						<option value="" hidden>選択してください</option>
 						<option value="1">ゲーム</option>
 						<option value="2">スポーツ</option>
 						<option value="3">ミュージック</option>
 						<option value="4">ニュース</option>
 					</select>
+					</div>
 				</label>
-				<br>
 				<label>本文
-					<textarea id="text" name="text"></textarea>
+					<div><textarea name="text" wrap="hard" rows="4" cols="40"></textarea></div>
 				</label>
-				<br>
 				<input type="hidden" name="token" value="$token">
 				<input type="submit" value="送信" class="sub">
 			</form>
-			<br><button type="button" onclick="location.replace('index.html');" class="button">トップページに戻る</button>
+			<br><button type="button" onclick="location.href='index.html'" class="bbb">トップページに戻る</button>
 	</body>
 	</HTML>
 eot4;
 }else if($ca_d!=""&&$te_d!=""){
 	$s->query("INSERT INTO toko_master VALUES (0,'$ca_d','$usid',now(),'$te_d',0)");
 	print <<<eot2
-	投稿しました
-	<br><button type="button" onclick="location.replace('index.html');" class="sub2">トップページに戻る</button>
-	<br><button type="button" onclick="location.replace('app1.html');" class="sub2">カテゴリ一覧へ</button>
+	<text>投稿しました</text>
+	<br><button type="button" onclick="location.replace('index.html');" class="bbb">トップページに戻る</button>
+	<br><button type="button" onclick="location.replace('app1.html');" class="bbb">カテゴリ一覧へ</button>
 	<form method="POST" action="app4.php">
 	<input type="hidden" name="cate" value="$ca_d">
-	<input type="submit" value="閲覧画面へ" class="sub2">
+	<input type="submit" value="閲覧画面へ" class="bbb">
 	</form>
 	</body>
 	</html>
 eot2;
 }else{
 	print <<<eot3
-	<div id="title">投稿画面</div> 
-	<text>入力されていない項目があります</text>
-		<form method="POST" action="app2.php">
+	<text2>入力されていない項目があります</text2>
+		<form method="POST" action="app2.php" class="form">
 			<label>カテゴリー
+				<div class="cp_ipselect cp_sl04">
 				<select name="category">
 					<option value="">選択してください</option>
 					<option value="1">ゲーム</option>
@@ -147,16 +215,15 @@ eot2;
 					<option value="3">ミュージック</option>
 					<option value="4">ニュース</option>
 				</select>
+				</div>
 			</label>
-			<br>
 			<label>本文
-				<textarea id="text" name="text">$te_d</textarea>
+				<div><textarea class="text" name="text"wrap="hard" rows="4" cols="40">$te_d</textarea></div>
 			</label>
-			<br>
 			<input type="hidden" name="token" value="$token">
 			<input type="submit" value="送信" class="sub">
 		</form>
-		<br><button type="button" onclick="location.replace('index.html');" class="button">トップページに戻る</button>
+		<br><button type="button" onclick="location.href='index.html'" class="bbb">トップページに戻る</button>
 	</body>
 	</html>
 eot3;
