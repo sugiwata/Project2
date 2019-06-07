@@ -169,9 +169,10 @@ if($ca_d!=""&&$te_d!=""){
 	$s->query("INSERT INTO toko_master VALUES (0,'$ca_d','$usid',now(),'$te_d',0)");
 	print <<<eot2
 	<text>投稿しました</text>
-	<br><button type="button" onclick="location.replace('index.html');" class="bbb">トップページに戻る</button>
-	<br><button type="button" onclick="location.replace('app1.html');" class="bbb">カテゴリ一覧へ</button>
+	<br><br><button type="button" onclick="location.replace('index.html');" class="bbb">トップページに戻る</button>
+	<br><br><button type="button" onclick="location.replace('app1.html');" class="bbb">カテゴリ一覧へ</button>
 	<form method="POST" action="app4.php">
+	<br>
 	<input type="hidden" name="cate" value="$ca_d">
 	<input type="submit" value="閲覧画面へ" class="bbb">
 	</form>
