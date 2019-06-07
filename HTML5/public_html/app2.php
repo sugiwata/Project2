@@ -5,7 +5,7 @@ session_start();
 $s=new PDO("mysql:host=localhost;dbname=pro2test","root","root");
 $ca_d=isset($_POST["category"])?$_POST["category"]:null;
 $te_d=isset($_POST["text"])?htmlspecialchars($_POST["text"]):null;
-$usid=isset($_SESSION["usid"])?htmlspecialchars($_SESSION["usid"]):null;
+$usid="k18030";//isset($_SESSION["usid"])?htmlspecialchars($_SESSION["usid"]):null;
 
 $session_token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
 $token = isset($_POST['token']) ? $_POST['token'] : '';
@@ -31,7 +31,7 @@ body{
 .title{
    font-size: 7em;
 	font-family: impact;
-
+	font-weight: bold;
 	color: #364e96;/*文字色*/
 	background: #dfefff;
 	box-shadow: 0px 0px 0px 5px #dfefff;
@@ -40,7 +40,7 @@ body{
 }
 .form{
 	padding: 7px 20px;
-	color: #00FFEA;
+	color: #FFFFFF;
 	font-size: 30px;
 }
 .cp_ipselect {
@@ -155,7 +155,7 @@ eot6;
 if($usid==null){
 	print <<<eot5
 	<text>ログインしていません</text>
-	<button type="button" onclick="location.href='app3.html'" class="bbb">ここからログインしてください</button>
+	<br><button type="button" onclick="location.href='app3.html'" class="bbb">ここからログインしてください</button>
 	</body>
 	</HTML>
 eot5;
@@ -165,31 +165,7 @@ eot5;
 $token = md5(uniqid(rand(), true));
 $_SESSION['token'] = $token;
 
-if($ca_d==null&&$te_d==null){
-	print <<<eot4
-		<form method="POST" action="app2.php" class="form">
-				<label>カテゴリー
-					<div class="cp_ipselect cp_sl04">
-					<select name="category" required>
-						<option value="" hidden>選択してください</option>
-						<option value="1">ゲーム</option>
-						<option value="2">スポーツ</option>
-						<option value="3">ミュージック</option>
-						<option value="4">ニュース</option>
-					</select>
-					</div>
-				</label>
-				<label>本文
-					<div><textarea name="text" wrap="hard" rows="4" cols="40"></textarea></div>
-				</label>
-				<input type="hidden" name="token" value="$token">
-				<input type="submit" value="送信" class="sub">
-			</form>
-			<br><button type="button" onclick="location.href='index.html'" class="bbb">トップページに戻る</button>
-	</body>
-	</HTML>
-eot4;
-}else if($ca_d!=""&&$te_d!=""){
+if($ca_d!=""&&$te_d!=""){
 	$s->query("INSERT INTO toko_master VALUES (0,'$ca_d','$usid',now(),'$te_d',0)");
 	print <<<eot2
 	<text>投稿しました</text>
@@ -203,13 +179,17 @@ eot4;
 	</html>
 eot2;
 }else{
+	if($ca_d!=null||$te_d!=null){
+	print <<<eot4
+		<text2>入力されていない項目があります</text2>
+eot4;
+	}
 	print <<<eot3
-	<text2>入力されていない項目があります</text2>
 		<form method="POST" action="app2.php" class="form">
 			<label>カテゴリー
 				<div class="cp_ipselect cp_sl04">
 				<select name="category">
-					<option value="">選択してください</option>
+					<option value="" hidden>選択してください</option>
 					<option value="1">ゲーム</option>
 					<option value="2">スポーツ</option>
 					<option value="3">ミュージック</option>
