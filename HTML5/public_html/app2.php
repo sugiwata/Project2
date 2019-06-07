@@ -5,7 +5,7 @@ session_start();
 $s=new PDO("mysql:host=localhost;dbname=pro2test","root","root");
 $ca_d=isset($_POST["category"])?$_POST["category"]:null;
 $te_d=isset($_POST["text"])?htmlspecialchars($_POST["text"]):null;
-$usid="k18030";//isset($_SESSION["usid"])?htmlspecialchars($_SESSION["usid"]):null;
+$usid=isset($_SESSION["usid"])?htmlspecialchars($_SESSION["usid"]):null;
 
 $session_token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
 $token = isset($_POST['token']) ? $_POST['token'] : '';
@@ -169,9 +169,10 @@ if($ca_d!=""&&$te_d!=""){
 	$s->query("INSERT INTO toko_master VALUES (0,'$ca_d','$usid',now(),'$te_d',0)");
 	print <<<eot2
 	<text>投稿しました</text>
-	<br><button type="button" onclick="location.replace('index.html');" class="bbb">トップページに戻る</button>
-	<br><button type="button" onclick="location.replace('app1.html');" class="bbb">カテゴリ一覧へ</button>
+	<br><br><button type="button" onclick="location.replace('index.html');" class="bbb">トップページに戻る</button>
+	<br><br><button type="button" onclick="location.replace('app1.html');" class="bbb">カテゴリ一覧へ</button>
 	<form method="POST" action="app4.php">
+	<br>
 	<input type="hidden" name="cate" value="$ca_d">
 	<input type="submit" value="閲覧画面へ" class="bbb">
 	</form>
