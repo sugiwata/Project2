@@ -5,7 +5,7 @@ session_start();
 $s=new PDO("mysql:host=localhost;dbname=pro2test","root","root");
 $ca_d=isset($_POST["category"])?$_POST["category"]:null;
 $te_d=isset($_POST["text"])?htmlspecialchars($_POST["text"]):null;
-$usid="k18030";//isset($_SESSION["usid"])?htmlspecialchars($_SESSION["usid"]):null;
+$usid=isset($_SESSION["usid"])?htmlspecialchars($_SESSION["usid"]):null;
 
 $session_token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
 $token = isset($_POST['token']) ? $_POST['token'] : '';
