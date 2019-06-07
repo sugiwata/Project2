@@ -21,8 +21,15 @@ and open the template in the editor.
               font-size: 23px;
           }
           div {
-              font-size: 4em;
-              font-weight: bold;
+            font-size: 6em;
+            font-family: impact;
+            font-weight: bold;
+
+            color: #364e96;/*文字色*/
+            background: #dfefff;
+            box-shadow: 0px 0px 0px 5px #dfefff;
+            border: dashed 2px white;
+            padding: 0.2em 0.5em;
           }
          .sub {
               display       : inline-block;
@@ -44,19 +51,43 @@ and open the template in the editor.
               background    : #000000;     /* 文字色     */
           }
           button {
+            display: inline-block;
+            padding: 7px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #FFF;
+            background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+            transition: .4s;
+
               font-size: large;
-              width: 40%;
-              height: 4em;
+              width: 30%;
+              height: 3em;
+              background-color: salmon;
+              font-family: impact;
 
           }
           body{
-              background-color: rgb(0, 250, 213);
+            display: inline-block;
+            padding: 7px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #FFF;
+            background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+            transition: .4s;
+
+              font-size: large;
+              width: 30%;
+              height: 3em;
+              background-color: salmon;
+              font-family: impact;
           }
         </style>
     </head>
     <body>
         <div>ユーザ登録</div>
     <?php
+      session_start();
+
       $sUserID=$_POST["fUserID"];
       $sUserName=$_POST['fUserName'];
       $sPassWd1=$_POST['fPassWd1'];
@@ -74,15 +105,20 @@ and open the template in the editor.
         $count = $re->fetchColumn();
         //データ件数が０件の場合
         if($count !=  0){
-           echo "すでに{$sUserName}の名前は登録済みです。もう一度別の名前で登録してください。
+           echo "<FONT COLOR=\"RED\">すでに{$sUserName}の名前は登録済みです。もう一度別の名前で登録してください。
                 </FONT><br>";
         }else{
            $s->query("INSERT INTO user_master VALUES ('$sUserID','$sPassWd1','$sUserName')");
+           $_SESSION['usid'] = $sUserID;
            echo "{$sUserName}のID登録が完了しました。";
+           echo "現在{$sUserName}はログイン済みです";
         }
       }
     ?>
     <br>
     <button type="button" onclick="location.replace('app1.html');">カテゴリ一覧へ</button>
+    <br>
+    <br>
+    <button type="button" onclick="location.replace('app2.php');">投稿画面へ</button>
     </body>
 </html>
