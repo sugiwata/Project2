@@ -85,34 +85,24 @@ and open the template in the editor.
       session_start();
 
       $sUserID=$_POST["fUserID"];
-      $sUserName=$_POST['fUserName'];
       $sPassWd1=$_POST['fPassWd1'];
-      $sPassWd2=$_POST['fPassWd2'];
+
 
       $s=new PDO("mysql:host=localhost;dbname=pro2test","root","root");
 
-      if($sPassWd1 != $sPassWd2){
-          echo "<text>パスワードが一致しません。もう一度登録しなおしてください。
-               </text><br>";
-
-      }else{
         $s->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
-        $re = $s->query("SELECT count(*) FROM user_master WHERE username ='$sUserName'");
+        $re = $s->query("SELECT count(*) FROM user_master WHERE userid ='$sUserID' and pass ='$sPassWd1'");
         $count = $re->fetchColumn();
-        //データ件数が０件の場合
+        //ユーザ情報が正しい場合
         if($count !=  0){
-           echo "<text>すでに{$sUserName}の名前は登録済みです。もう一度別の名前で登録してください。
-                </text><br>";
+          $_SESSION['usid'] = $sUserID;
+          echo "<text>ログイン処理が完了しました。</text><br>";
         }else{
-           $s->query("INSERT INTO user_master VALUES ('$sUserID','$sPassWd1','$sUserName')");
-           $_SESSION['usid'] = $sUserID;
-           echo "<text>{$sUserName}のID登録が完了しました。</text><br>";
-           echo "<text>現在{$sUserName}はログイン済みです</text>";
+           echo "<text>ログイン処理が失敗しました。</text><br>";
         }
-      }
     ?>
     <br>
-    <button type="button" onclick="location.replace('app1.html');">カテゴリ一覧へ</button>
+    <button type="button" onclick="location.replace('app3-3.html');">ログイン画面へ戻る</button>
     <br>
     <br>
     <button type="button" onclick="location.replace('app2.php');">投稿画面へ</button>
