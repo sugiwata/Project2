@@ -1,3 +1,8 @@
+<?php
+session_start();
+$token = md5(uniqid(rand(), true));
+$_SESSION['token'] = $token;
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -97,6 +102,7 @@ and open the template in the editor.
           <text2>確認用パスワード：</text2>
           <input name="fPassWd2" type="password" id="fPassWd2"><br>
           <br>
+          <?php print"<input type='hidden' value='$token' name='token'>";?>
           <input type="reset"  value="クリア" class="sub">
           <input type="submit" value="送信する" class="sub">
 
