@@ -89,9 +89,18 @@ and open the template in the editor.
       $sPassWd1=$_POST['fPassWd1'];
       $sPassWd2=$_POST['fPassWd2'];
 
-      $s=new PDO("mysql:host=localhost;dbname=pro2test","root","root");
+      $s_token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
+      $token = isset($_POST['token']) ? $_POST['token'] : '';
 
-      if($sPassWd1 != $sPassWd2){
+      $s=new PDO("mysql:host=localhost;dbname=pro2test","root","root");
+      
+      if($token == '' || $token != $s_token ){
+        //二重送信される場合
+        echo "<text>不正な処理を確認しました。もう一度登録しなおしてください。
+               </text><br>";
+        
+      }
+      else if($sPassWd1 != $sPassWd2){
           echo "<text>パスワードが一致しません。もう一度登録しなおしてください。
                </text><br>";
 
