@@ -155,7 +155,7 @@ eot6;
 if($usid==null){
 	print <<<eot5
 	<text>ログインしていません</text>
-	<br><button type="button" onclick="location.href='app3.html'" class="bbb">ここからログインしてください</button>
+	<br><button type="button" onclick="location.href='app3.php'" class="bbb">ここからログインしてください</button>
 	</body>
 	</HTML>
 eot5;
